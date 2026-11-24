@@ -1,0 +1,919 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MOCHA | Coffee House</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+:root {
+    --brown: #2b1d16;
+    --dark: #1b120e;
+    --gold: #c69b65;
+    --cream: #f5eee5;
+    --white: #fffaf4;
+}
+
+body {
+    font-family: 'Cairo', sans-serif;
+    background: var(--cream);
+    color: var(--brown);
+}
+
+button, a {
+    font-family: inherit;
+}
+
+header {
+    background: var(--dark);
+    color: white;
+    padding: 18px 8%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    font-size: 27px;
+    font-weight: 800;
+    color: var(--gold);
+    letter-spacing: 2px;
+}
+
+nav {
+    display: flex;
+    gap: 30px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    transition: .3s;
+}
+
+nav a:hover {
+    color: var(--gold);
+}
+
+.cart-button {
+    background: var(--gold);
+    border: none;
+    padding: 10px 17px;
+    border-radius: 7px;
+    cursor: pointer;
+    color: var(--dark);
+    font-weight: bold;
+}
+
+/* الواجهة الرئيسية */
+
+.hero {
+    min-height: 590px;
+    background:
+    linear-gradient(90deg, rgba(27,18,14,.35), rgba(27,18,14,.95)),
+    url('https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=1600');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    padding: 70px 10%;
+    color: white;
+}
+
+.hero-content {
+    max-width: 600px;
+}
+
+.hero-content small {
+    color: var(--gold);
+    font-size: 17px;
+}
+
+.hero-content h1 {
+    font-size: 55px;
+    line-height: 1.5;
+    margin: 20px 0;
+}
+
+.hero-content h1 span {
+    color: var(--gold);
+}
+
+.hero-content p {
+    color: #ddd;
+    line-height: 2.2;
+    font-size: 15px;
+}
+
+.main-btn {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 13px 30px;
+    background: var(--gold);
+    color: var(--dark);
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: .3s;
+}
+
+.main-btn:hover {
+    background: white;
+}
+
+/* الأقسام */
+
+section {
+    padding: 85px 8%;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+.section-title small {
+    color: var(--gold);
+    font-weight: bold;
+}
+
+.section-title h2 {
+    font-size: 34px;
+    margin-top: 8px;
+}
+
+.section-title p {
+    color: #81756b;
+    margin-top: 10px;
+}
+
+/* عن الكوفي */
+
+.about {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: center;
+}
+
+.about-image {
+    height: 380px;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.about-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.about-content h2 {
+    font-size: 34px;
+    margin-bottom: 20px;
+}
+
+.about-content h2 span {
+    color: var(--gold);
+}
+
+.about-content p {
+    line-height: 2.3;
+    color: #75675d;
+}
+
+/* قائمة المنتجات */
+
+.menu {
+    background: #eee3d7;
+}
+
+.filters {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 35px;
+}
+
+.filter-btn {
+    border: 1px solid var(--gold);
+    background: transparent;
+    color: var(--brown);
+    padding: 9px 22px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.filter-btn.active,
+.filter-btn:hover {
+    background: var(--brown);
+    color: white;
+}
+
+.products {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.product {
+    background: var(--white);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: .3s;
+    box-shadow: 0 5px 20px #00000008;
+}
+
+.product:hover {
+    transform: translateY(-7px);
+}
+
+.product img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+
+.product-info {
+    padding: 20px;
+}
+
+.product-info h3 {
+    font-size: 19px;
+}
+
+.product-info p {
+    color: #82756a;
+    font-size: 13px;
+    margin: 10px 0;
+    line-height: 1.8;
+}
+
+.product-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.price {
+    color: #a6783d;
+    font-weight: 800;
+    font-size: 18px;
+}
+
+.add-btn {
+    background: var(--brown);
+    color: white;
+    border: none;
+    padding: 9px 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.add-btn:hover {
+    background: var(--gold);
+    color: var(--dark);
+}
+
+/* مميزاتنا */
+
+.why {
+    background: var(--dark);
+    color: white;
+    text-align: center;
+}
+
+.why .section-title h2 {
+    color: white;
+}
+
+.features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.feature {
+    padding: 30px 20px;
+    border: 1px solid #574333;
+    border-radius: 10px;
+}
+
+.feature i {
+    color: var(--gold);
+    font-size: 35px;
+    margin-bottom: 20px;
+}
+
+.feature h3 {
+    margin-bottom: 12px;
+}
+
+.feature p {
+    color: #c5b9ad;
+    line-height: 2;
+    font-size: 14px;
+}
+
+/* التواصل */
+
+.contact {
+    text-align: center;
+}
+
+.contact-info {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.contact-info div {
+    min-width: 200px;
+    padding: 25px;
+    background: white;
+    border-radius: 10px;
+}
+
+.contact-info i {
+    color: var(--gold);
+    font-size: 25px;
+    margin-bottom: 12px;
+}
+
+/* سلة المشتريات */
+
+.cart-panel {
+    position: fixed;
+    top: 0;
+    left: -420px;
+    width: 350px;
+    max-width: 90%;
+    height: 100%;
+    background: white;
+    z-index: 200;
+    padding: 25px;
+    box-shadow: 0 0 30px #0003;
+    transition: .3s;
+    overflow-y: auto;
+}
+
+.cart-panel.open {
+    left: 0;
+}
+
+.cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.close-cart {
+    border: none;
+    background: none;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.cart-item {
+    border-bottom: 1px solid #eee;
+    padding: 15px 0;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.cart-item button {
+    border: none;
+    background: #eee;
+    padding: 5px 9px;
+    cursor: pointer;
+}
+
+.cart-total {
+    margin-top: 25px;
+    font-weight: bold;
+    font-size: 19px;
+}
+
+.checkout {
+    width: 100%;
+    margin-top: 20px;
+    padding: 13px;
+    border: none;
+    background: var(--gold);
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+/* أسفل الموقع */
+
+footer {
+    background: #120c09;
+    color: #bcb0a4;
+    text-align: center;
+    padding: 25px;
+    font-size: 13px;
+}
+
+.socials {
+    margin-bottom: 15px;
+}
+
+.socials a {
+    color: var(--gold);
+    margin: 0 10px;
+    font-size: 20px;
+}
+
+/* توافق الهاتف */
+
+@media(max-width: 850px) {
+    header {
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    nav {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .hero-content h1 {
+        font-size: 40px;
+    }
+
+    .about {
+        grid-template-columns: 1fr;
+    }
+
+    .products {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .features {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media(max-width: 550px) {
+    .products {
+        grid-template-columns: 1fr;
+    }
+
+    .hero {
+        min-height: 500px;
+        padding: 50px 7%;
+    }
+
+    .hero-content h1 {
+        font-size: 34px;
+    }
+
+    section {
+        padding: 65px 6%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">MOCHA.</div>
+
+    <nav>
+        <a href="#home">الرئيسية</a>
+        <a href="#about">عن الكوفي</a>
+        <a href="#menu">القائمة</a>
+        <a href="#why">مميزاتنا</a>
+        <a href="#contact">تواصل معنا</a>
+    </nav>
+
+    <button class="cart-button" onclick="toggleCart()">
+        <i class="fas fa-shopping-bag"></i>
+        السلة <span id="cart-count">0</span>
+    </button>
+</header>
+
+<!-- الواجهة الرئيسية -->
+
+<section class="hero" id="home">
+    <div class="hero-content">
+        <small>مرحباً بك في MOCHA</small>
+
+        <h1>
+            قهوتك المفضلة<br>
+            <span>تبدأ من هنا.</span>
+        </h1>
+
+        <p>
+            استمتع بأجود أنواع القهوة المحضرة بعناية،
+            في أجواء تجمع بين الراحة والطعم المميز.
+            لأن كل يوم يستحق فنجاناً رائعاً.
+        </p>
+
+        <a href="#menu" class="main-btn">اكتشف قائمتنا</a>
+    </div>
+</section>
+
+<!-- عن الكوفي -->
+
+<section class="about" id="about">
+
+    <div class="about-image">
+        <img src="https://images.unsplash.com/photo-1445116572660-236099ec97a0?w=900"
+        alt="داخل الكوفي">
+    </div>
+
+    <div class="about-content">
+        <h2>قصتنا مع <span>القهوة</span></h2>
+
+        <p>
+            في MOCHA نؤمن أن القهوة ليست مجرد مشروب،
+            بل تجربة تجمع الناس وتصنع لحظات جميلة.
+
+            لذلك نهتم باختيار أفضل أنواع البن،
+            ونحرص على تقديم مشروبات ذات جودة عالية
+            في كل مرة تزورنا فيها.
+        </p>
+
+        <a href="#menu" class="main-btn">شاهد القائمة</a>
+    </div>
+
+</section>
+
+<!-- القائمة -->
+
+<section class="menu" id="menu">
+
+    <div class="section-title">
+        <small>قائمتنا</small>
+        <h2>اكتشف <span>مشروباتنا</span></h2>
+        <p>اختر مشروبك المفضل واستمتع بطعمه</p>
+    </div>
+
+    <div class="filters">
+        <button class="filter-btn active" onclick="filterProducts('all',this)">الكل</button>
+        <button class="filter-btn" onclick="filterProducts('coffee',this)">القهوة</button>
+        <button class="filter-btn" onclick="filterProducts('cold',this)">بارد</button>
+        <button class="filter-btn" onclick="filterProducts('dessert',this)">الحلويات</button>
+    </div>
+
+    <div class="products">
+
+        <!-- إسبريسو -->
+
+        <div class="product" data-category="coffee">
+            <img src="https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?w=700" alt="إسبريسو">
+
+            <div class="product-info">
+                <h3>إسبريسو</h3>
+                <p>قهوة إيطالية مركزة بطعم غني.</p>
+
+                <div class="product-bottom">
+                    <span class="price">2.00 د.أ</span>
+                    <button class="add-btn" onclick="addToCart('إسبريسو',2)">أضف للسلة</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- سبانش ماتشا لاتيه -->
+
+        <div class="product" data-category="coffee">
+            <img src="img/images.jpg" alt="سبانش ماتشا لاتيه">
+
+            <div class="product-info">
+                <h3>سبانش ماتشا لاتيه</h3>
+                <p>مزيج الماتشا اليابانية والحليب مع الحليب المكثف المحلى.</p>
+
+                <div class="product-bottom">
+                    <span class="price">2.50 د.أ</span>
+                    <button class="add-btn" onclick="addToCart('سبانش ماتشا لاتيه',2.5)">أضف للسلة</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- كابتشينو -->
+
+        <div class="product" data-category="coffee">
+            <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?w=700" alt="كابتشينو">
+
+            <div class="product-info">
+                <h3>كابتشينو</h3>
+                <p>قهوة مع رغوة حليب ناعمة.</p>
+
+                <div class="product-bottom">
+                    <span class="price">2.50 د.أ</span>
+                    <button class="add-btn" onclick="addToCart('كابتشينو',2.5)">أضف للسلة</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- آيس لاتيه -->
+
+        <div class="product" data-category="cold">
+            <img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=700" alt="آيس لاتيه">
+
+            <div class="product-info">
+                <h3>آيس لاتيه</h3>
+                <p>لاتيه بارد ومنعش مع الثلج.</p>
+
+                <div class="product-bottom">
+                    <span class="price">3.00 د.أ</span>
+                    <button class="add-btn" onclick="addToCart('آيس لاتيه',3)">أضف للسلة</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- فرابتشينو -->
+
+        <div class="product" data-category="cold">
+            <img src="https://images.unsplash.com/photo-1517701604599-bb29b565090c?w=700" alt="فرابتشينو">
+
+            <div class="product-info">
+                <h3>فرابتشينو</h3>
+                <p>مشروب بارد بطعم القهوة والحليب.</p>
+
+                <div class="product-bottom">
+                    <span class="price">3.50 د.أ</span>
+                    <button class="add-btn" onclick="addToCart('فرابتشينو',3.5)">أضف للسلة</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- كيك الشوكولاتة -->
+
+        <div class="product" data-category="dessert">
+            <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=700" alt="كيك الشوكولاتة">
+
+            <div class="product-info">
+                <h3>كيك الشوكولاتة</h3>
+                <p>قطعة كيك غنية بالشوكولاتة.</p>
+
+                <div class="product-bottom">
+                    <span class="price">3.00 د.أ</span>
+                    <button class="add-btn" onclick="addToCart('كيك الشوكولاتة',3)">أضف للسلة</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- مميزاتنا -->
+
+<section class="why" id="why">
+
+    <div class="section-title">
+        <small>لماذا MOCHA؟</small>
+        <h2>تجربة مختلفة في كل فنجان</h2>
+    </div>
+
+    <div class="features">
+
+        <div class="feature">
+            <i class="fas fa-coffee"></i>
+            <h3>قهوة مميزة</h3>
+            <p>نهتم بجودة البن ونختار أفضل النكهات.</p>
+        </div>
+
+        <div class="feature">
+            <i class="fas fa-heart"></i>
+            <h3>حب التفاصيل</h3>
+            <p>نحضر كل مشروب بعناية واهتمام.</p>
+        </div>
+
+        <div class="feature">
+            <i class="fas fa-couch"></i>
+            <h3>أجواء مريحة</h3>
+            <p>مكان مناسب للاسترخاء وقضاء وقت ممتع.</p>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- التواصل -->
+
+<section class="contact" id="contact">
+
+    <div class="section-title">
+        <small>نحن بانتظارك</small>
+        <h2>تواصل معنا</h2>
+        <p>يسعدنا زيارتك أو التواصل معنا</p>
+    </div>
+
+    <div class="contact-info">
+
+        <div>
+            <i class="fas fa-phone"></i>
+            <h3>الهاتف</h3>
+            <p>0790000000</p>
+        </div>
+
+        <div>
+            <i class="fas fa-map-marker-alt"></i>
+            <h3>الموقع</h3>
+            <p>الأردن - عمّان</p>
+        </div>
+
+        <div>
+            <i class="fas fa-clock"></i>
+            <h3>أوقات العمل</h3>
+            <p>يومياً من 9 صباحاً حتى 12 مساءً</p>
+        </div>
+
+    </div>
+
+</section>
+
+<footer>
+    <div class="socials">
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-tiktok"></i></a>
+    </div>
+
+    © 2026 MOCHA Coffee House - جميع الحقوق محفوظة
+</footer>
+
+<!-- سلة المشتريات -->
+
+<div class="cart-panel" id="cart-panel">
+
+    <div class="cart-header">
+        <h2>سلة المشتريات</h2>
+        <button class="close-cart" onclick="toggleCart()">×</button>
+    </div>
+
+    <div id="cart-items">
+        <p>السلة فارغة حالياً.</p>
+    </div>
+
+    <div class="cart-total">
+        المجموع: <span id="cart-total">0.00</span> د.أ
+    </div>
+
+    <button class="checkout" onclick="checkout()">
+        إتمام الطلب عبر واتساب
+    </button>
+
+</div>
+
+<script>
+
+// سلة المشتريات
+let cart = [];
+
+// إضافة منتج للسلة
+function addToCart(name, price) {
+
+    const existing = cart.find(item => item.name === name);
+
+    if (existing) {
+        existing.quantity++;
+    } else {
+        cart.push({
+            name: name,
+            price: price,
+            quantity: 1
+        });
+    }
+
+    updateCart();
+    alert("تمت إضافة " + name + " إلى السلة");
+}
+
+// تحديث السلة
+function updateCart() {
+
+    const itemsContainer = document.getElementById("cart-items");
+    const count = document.getElementById("cart-count");
+    const totalElement = document.getElementById("cart-total");
+
+    let total = 0;
+    let totalCount = 0;
+
+    itemsContainer.innerHTML = "";
+
+    if (cart.length === 0) {
+        itemsContainer.innerHTML = "<p>السلة فارغة حالياً.</p>";
+    }
+
+    cart.forEach((item, index) => {
+
+        total += item.price * item.quantity;
+        totalCount += item.quantity;
+
+        itemsContainer.innerHTML += `
+            <div class="cart-item">
+                <div>
+                    <strong>${item.name}</strong>
+                    <p>${item.price.toFixed(2)} د.أ × ${item.quantity}</p>
+                </div>
+
+                <button onclick="removeItem(${index})">
+                    حذف
+                </button>
+            </div>
+        `;
+    });
+
+    count.textContent = totalCount;
+    totalElement.textContent = total.toFixed(2);
+}
+
+// حذف منتج
+function removeItem(index) {
+    cart.splice(index, 1);
+    updateCart();
+}
+
+// فتح وإغلاق السلة
+function toggleCart() {
+    document.getElementById("cart-panel").classList.toggle("open");
+}
+
+// تصفية المنتجات
+function filterProducts(category, button) {
+
+    document.querySelectorAll(".filter-btn").forEach(btn => {
+        btn.classList.remove("active");
+    });
+
+    button.classList.add("active");
+
+    document.querySelectorAll(".product").forEach(product => {
+
+        if (category === "all" ||
+            product.dataset.category === category) {
+
+            product.style.display = "block";
+
+        } else {
+
+            product.style.display = "none";
+        }
+    });
+}
+
+// إرسال الطلب عبر واتساب
+function checkout() {
+
+    if (cart.length === 0) {
+        alert("السلة فارغة!");
+        return;
+    }
+
+    let message = "مرحباً، أريد طلب المنتجات التالية:\n\n";
+
+    cart.forEach(item => {
+        message += item.name + " × " + item.quantity +
+        " = " + (item.price * item.quantity).toFixed(2) + " د.أ\n";
+    });
+
+    const total = cart.reduce(
+        (sum, item) => sum + item.price * item.quantity, 0
+    );
+
+    message += "\nالمجموع: " + total.toFixed(2) + " د.أ";
+
+    // غيّر الرقم إلى رقم واتساب الكوفي
+    const phone = "962790000000";
+
+    window.open(
+        "https://wa.me/" + phone + "?text=" + encodeURIComponent(message),
+        "_blank"
+    );
+}
+
+</script>
+
+</body>
+</html>
